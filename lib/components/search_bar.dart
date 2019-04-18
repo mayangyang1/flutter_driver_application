@@ -60,7 +60,7 @@ Widget searchBar(BuildContext context, List singlePickerList, int index, Functio
               ],
             ),
             onTap: (){
-              singlePicer(context, singlePickerList, index,(res){
+              singlePicker(context, singlePickerList, index,(res){
                 if(res['key'] == 'confirm') {
                   change(res);
                 }else if(res['key'] == 'cancel') {

@@ -190,4 +190,13 @@ Map<String, Map> unit = {
 
 List carTypes = ["请选择","A1", "A2", "A3", "B1", "B2", "C1", "C2"];
 
+const List attachList = ['cardFront', 'cardAfter', 'driverOne', 'driverTwo', 'qualificationCertificateResourceCodeOne', 'qualificationCertificateResourceCodeTwo'];
+Map<String, Map> attachments = {
+  'cardFront': { 'name': '身份证正面', 'value': 'assets/images/pic.png', 'status': 'hidden', 'resourceCode': '' },
+  'cardAfter': { 'name': '身份证反面', 'value': 'assets/images/pic.png', 'status': 'hidden', 'resourceCode': '' },
+  'driverOne': { 'name': '驾驶证第一联照片', 'value': 'assets/images/pic.png', 'status': 'hidden', 'resourceCode': '' },
+  'driverTwo': { 'name': '驾驶证第二联照片', 'value': 'assets/images/pic.png', 'status': 'hidden', 'resourceCode': '' },
+  'qualificationCertificateResourceCodeOne': { 'name': '从业资格证照片一', 'value': 'assets/images/pic.png', 'status': 'hidden', 'resourceCode': '' },
+  'qualificationCertificateResourceCodeTwo': { 'name': '从业资格证照片二', 'value': 'assets/images/pic.png', 'status': 'hidden', 'resourceCode': '' },
+};
 

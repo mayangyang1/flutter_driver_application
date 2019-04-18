@@ -4,13 +4,12 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import '../common/service_method.dart';
 import '../common/util.dart';
 import '../mode/waybill_list_mode.dart';
-import '../pages/all_waybill_page.dart';
 
-class WaybillPage extends StatefulWidget {
-  _WaybillPageState createState() => _WaybillPageState();
+class AllWaybillPage extends StatefulWidget {
+  _AllWaybillPageState createState() => _AllWaybillPageState();
 }
 
-class _WaybillPageState extends State<WaybillPage> {
+class _AllWaybillPageState extends State<AllWaybillPage> {
   GlobalKey<RefreshFooterState> _footerKey = new GlobalKey<RefreshFooterState>();
   GlobalKey<RefreshHeaderState> _headerKey = new GlobalKey<RefreshHeaderState>();
   List waybillList = [];
@@ -24,9 +23,7 @@ class _WaybillPageState extends State<WaybillPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( centerTitle: true, title: Text('运单列表'), actions: <Widget>[Center(child: InkWell(child: Text('全部运单  ',style: TextStyle(fontSize: ScreenUtil().setSp(32) ),),onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>AllWaybillPage()));
-      },),)],),
+      appBar: AppBar( centerTitle: true, title: Text('运单列表')),
       body: Container(
         child: EasyRefresh(
           child: waybillList.length > 0
@@ -155,7 +152,7 @@ class _WaybillPageState extends State<WaybillPage> {
     );
   }
   _getWaybillList() {//获取运单列表
-    String stringParams = '?page=$page&size=$size&waybillStatus=unloading,going';
+    String stringParams = '?page=$page&size=$size';
     getAjax('waybillList', stringParams, context).then((res){
        WaybillListMode waybilllistmode =WaybillListMode.fromJson(res);
       if(waybilllistmode.code == 200 && waybilllistmode.content.length > 0) {

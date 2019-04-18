@@ -126,3 +126,28 @@ Future postAjaxStr(url, params, context) async {
   }
 }
 
+Future uploaFile(url, FormData formData, context) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String  cookies = 'JSESSIONID=' +  prefs.get('cookies');
+  try {
+    Response response;
+    Dio dio = new Dio();
+    dio.options.baseUrl = serviceUrl;
+    dio.options.contentType = ContentType.parse("application/x-www-form-urlencoded");
+    dio.options.headers['Cookie'] = cookies;
+    response = await dio.post(servicePath[url], data:formData);
+    if(response.data['code'] == 500) {
+      Toast.toast(context, response.data['content']);
+    }else if(response.data['code'] == 401) {
+      Navigator.pushNamedAndRemoveUntil(context, '/login', (route)=>false);
+    }else{
+      return response.data;
+    }
+    
+  } on DioError catch (e) {
+   if (e.response != null && e.response.data['code'] == 401) {
+      Navigator.pushNamedAndRemoveUntil(context, '/login', (route)=>false);
+    }
+  }
+}
+

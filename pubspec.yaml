@@ -26,6 +26,8 @@ dependencies:
   provide: ^1.0.2
   shared_preferences: ^0.5.1
   photo_view: ^0.2.4
+  image_picker: ^0.5.2
+
 
 dev_dependencies:
   flutter_test:
@@ -57,6 +59,8 @@ flutter:
    - assets/images/arrow.png
    - assets/images/ewm.png
    - assets/images/mobile.png
+   - assets/images/pic.png
+   - assets/images/btn_delete_photo.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 

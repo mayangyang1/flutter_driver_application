@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-singlePicer(BuildContext context, List<Map> singlePickerList, int _index, Function success) {
+singlePicker(BuildContext context, List<Map> singlePickerList, int _index, Function success) {
   return showCupertinoModalPopup(
     context: context,
     builder: (BuildContext context) {

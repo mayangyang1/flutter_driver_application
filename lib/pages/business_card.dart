@@ -6,6 +6,9 @@ import '../mode/main_truck_list_mode.dart';
 import '../mode/trailer_truck_mode.dart';
 import 'package:photo_view/photo_view.dart';
 import '../config/service_url.dart';
+import '../pages/driver_info_page.dart';
+import '../pages/main_vehicle_page.dart';
+import '../pages/trailer_page.dart';
 
 
 class  BusinessCardPage extends StatefulWidget {
@@ -45,49 +48,70 @@ class _BusinessCardPageState extends State<BusinessCardPage> {
     );
   }
   Widget driverMessageModel() {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(width: 1,color: Color(0xFFCCCCCC))),
-        color: Color(0xFFFFFFFF)
+    return InkWell(
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(width: 1,color: Color(0xFFCCCCCC))),
+          color: Color(0xFFFFFFFF)
+        ),
+        child: Column(
+          children: <Widget>[
+            statusItem('司机', driverStatus),
+            commonItem('姓名', selfMessage?.fullName, true),
+            commonItem('手机',  selfMessage?.phone, true),
+            ewItem('二维码名片')
+          ],
+        ),
       ),
-      child: Column(
-        children: <Widget>[
-          statusItem('司机', driverStatus),
-          commonItem('姓名', selfMessage?.fullName, true),
-          commonItem('手机',  selfMessage?.phone, true),
-          ewItem('二维码名片')
-        ],
-      ),
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>DriverInfoPage())).then((res){
+          _getSelfInfo();
+        });
+      },
     );
   }
   Widget mainTruckMessageModel() {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(width: 1,color: Color(0xFFCCCCCC))),
-        color: Color(0xFFFFFFFF)
+    return InkWell(
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(width: 1,color: Color(0xFFCCCCCC))),
+          color: Color(0xFFFFFFFF)
+        ),
+        child: Column(
+          children: <Widget>[
+            statusItem('主车', mainTruckStatus),
+            commonItem('车牌号', mainTruckMessage?.truckLicenseNo, true),
+            commonItem('车型', mainTruckMessage?.truckModelName, false)
+          ],
+        ),
       ),
-      child: Column(
-        children: <Widget>[
-           statusItem('主车', mainTruckStatus),
-           commonItem('车牌号', mainTruckMessage?.truckLicenseNo, true),
-           commonItem('车型', mainTruckMessage?.truckModelName, false)
-        ],
-      ),
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>MainVehiclePage())).then((res){
+          _getSelfInfo();
+        });
+      },
     );
   }
   Widget trailerTruckMessageModel() {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(width: 1,color: Color(0xFFCCCCCC))),
-        color: Color(0xFFFFFFFF)
+    return InkWell(
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(width: 1,color: Color(0xFFCCCCCC))),
+          color: Color(0xFFFFFFFF)
+        ),
+        child: Column(
+          children: <Widget>[
+            statusItem('挂车', trailerTruckStatus),
+            commonItem('车牌号', trialerTruckMessage?.truckLicenseNo, true),
+            commonItem('车型', trialerTruckMessage?.truckModelName, false)
+          ],
+        ),
       ),
-      child: Column(
-        children: <Widget>[
-           statusItem('挂车', trailerTruckStatus),
-           commonItem('车牌号', trialerTruckMessage?.truckLicenseNo, true),
-           commonItem('车型', trialerTruckMessage?.truckModelName, false)
-        ],
-      ),
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>TrailerPage())).then((res){
+          _getSelfInfo();
+        });
+      },
     );
   }
   Widget statusItem(String title, String status) {

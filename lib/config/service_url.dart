@@ -30,5 +30,8 @@ const servicePath = {
   'addSubscribeRoure' : '$serviceUrl/resource/resource/resource_route_subscribe/add', //添加订阅线路
   'modifyLoginAccount' : '$serviceUrl/account/account/modify_login_account', //修改手机号
   'sendSelfVerifyCode' : '$serviceUrl/account/account/send/self/verify_code', //当前账户获取验证码
-
+  'updateImage' : '$serviceUrl/person/fw/image/update', //上传图片
+  'personalSelfEdit': '$serviceUrl/driver-api/driver-api/person/self/edit', //暂存司机信息
+  'newPersonalSelfCentry': '$serviceUrl/driver-api/driver-api/new/person/self/edit', //司机信息提交认证
+  
 };
