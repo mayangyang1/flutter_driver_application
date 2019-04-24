@@ -7,6 +7,7 @@ import 'dart:convert';
 import '../common/util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../mode/resource_list_model.dart';
+import '../pages/resource_detail_page.dart';
 
 class ResourcePage extends StatefulWidget {
   _ResourcePageState createState() => _ResourcePageState();
@@ -125,24 +126,30 @@ class _ResourcePageState extends State<ResourcePage> {
     );
   }
   Widget itemCard(int index){
-    return Container(
-      margin: EdgeInsets.only(bottom: 10.0),
-      padding: EdgeInsets.all(10.0),
-      // height: 200,
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(width: 1,color: Color(0XFFCCCCCC)),top: BorderSide(width: 1,color: Color(0xFFCCCCCC))),
-        color: Color(0xFFFFFFFF)
+    return InkWell(
+      child: Container(
+        margin: EdgeInsets.only(bottom: 10.0),
+        padding: EdgeInsets.all(10.0),
+        // height: 200,
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(width: 1,color: Color(0XFFCCCCCC)),top: BorderSide(width: 1,color: Color(0xFFCCCCCC))),
+          color: Color(0xFFFFFFFF)
+        ),
+        child: Column(
+          children: <Widget>[
+            lineRouteWidget(index),
+            resourceLists[index].routeName != null
+            ? commonItem('线       路', "${resourceLists[index].routeName}")
+            : Text('',style: TextStyle(fontSize: 0)),
+            commonItem('货       品', "${resourceLists[index].goodsName}"),
+            commonItem('司机运价',  "${resourceLists[index].quotePrice}${unit[resourceLists[index].meterageType]['driver.price'][resourceLists[index].quotePriceUnitCode]}"),
+          ],
+        ),
       ),
-      child: Column(
-        children: <Widget>[
-          lineRouteWidget(index),
-          resourceLists[index].routeName != null
-          ? commonItem('线       路', "${resourceLists[index].routeName}")
-          : Text('',style: TextStyle(fontSize: 0)),
-          commonItem('货       品', "${resourceLists[index].goodsName}"),
-          commonItem('司机运价',  "${resourceLists[index].quotePrice}${unit[resourceLists[index].meterageType]['driver.price'][resourceLists[index].quotePriceUnitCode]}"),
-        ],
-      ),
+      onTap: (){
+        String code = resourceLists[index].code;
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>ResourceDetialPage(code: code,)));
+      },
     );
   }
   Widget lineRouteWidget(int index){

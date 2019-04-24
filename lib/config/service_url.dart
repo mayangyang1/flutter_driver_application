@@ -33,5 +33,8 @@ const servicePath = {
   'updateImage' : '$serviceUrl/person/fw/image/update', //上传图片
   'personalSelfEdit': '$serviceUrl/driver-api/driver-api/person/self/edit', //暂存司机信息
   'newPersonalSelfCentry': '$serviceUrl/driver-api/driver-api/new/person/self/edit', //司机信息提交认证
-  
+  'truckAdd': '$serviceUrl/driver-api/driver-api/truck/add',//新增主车
+  'truckEdite': '$serviceUrl/driver-api/driver-api/truck/edit',//更新主车
+  'trailerInfo': '$serviceUrl//driver-api/driver-api/trailer_truck/get', //查询挂车信息
+  'searchTruckInfo': '$serviceUrl/driver-api/driver-api/truck/all/list',//查询车牌号
 };

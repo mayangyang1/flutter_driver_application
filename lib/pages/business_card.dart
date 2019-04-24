@@ -24,6 +24,7 @@ class _BusinessCardPageState extends State<BusinessCardPage> {
   String mainTruckStatus = '未提交认证';
   String trailerTruckStatus = '未提交认证';
   bool showTrailerTruck = false;
+  String truckCode;
   @override
   void initState() { 
     super.initState();
@@ -108,7 +109,7 @@ class _BusinessCardPageState extends State<BusinessCardPage> {
         ),
       ),
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>TrailerPage())).then((res){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>TrailerPage(truckCode:truckCode))).then((res){
           _getSelfInfo();
         });
       },
@@ -217,6 +218,7 @@ class _BusinessCardPageState extends State<BusinessCardPage> {
           setState(() {
            showTrailerTruck = true; 
           });
+          truckCode = mainTruckMessage.truckCode;
           _getTrailerTruckMessage(mainTruckMessage.truckCode);
         }
       }
@@ -246,6 +248,8 @@ class _BusinessCardPageState extends State<BusinessCardPage> {
   void dispose() {
     selfMessage = null;
     mainTruckMessage = null;
+    mainTruckStatus = '';
+    trailerTruckStatus = '';
     super.dispose();
   }
 }

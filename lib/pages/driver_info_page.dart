@@ -330,7 +330,7 @@ class _DriverInfoPageState extends State<DriverInfoPage> {
           userdriverNumberController.text = driverInfo['driverLicenseNo'];
           userOccupationalController.text = driverInfo['qualificationCertificateNumber'];
           code = driverInfo['code'];
-          canEdite = driverInfo['certStatus'] == 'authenticating' || driverInfo['certStatus'] == 'authenticating'? false : true;
+          canEdite = driverInfo['certStatus'] == 'authenticating' || driverInfo['certStatus'] == 'authenticated'? false : true;
         });
       }
     });

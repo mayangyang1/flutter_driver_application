@@ -14,7 +14,11 @@ getCookieAndSaveInStorage (res){
   });
   return cookies;
 }
-
+Map licensePlate = {
+  '01': '大型汽车号牌',
+  '02': '小型汽车号牌',
+  '99': '其他号牌'
+};
 Map truckModel = {
   'H01': '普通货车',
   'H02': '厢式货车',
@@ -60,7 +64,7 @@ Map waybillStatus = {
   'finish': '运输完成',
   'cancel': '运单取消'
 };
-Map powerType = {
+Map<String,String> powerTypeMap = {
   'gas': '气车',
   'oil': '油车'
 };
