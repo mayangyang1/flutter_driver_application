@@ -5,6 +5,7 @@ import '../common/service_method.dart';
 import '../common/util.dart';
 import '../mode/waybill_list_mode.dart';
 import '../pages/all_waybill_page.dart';
+import '../components/progressDialog.dart';
 
 class WaybillPage extends StatefulWidget {
   _WaybillPageState createState() => _WaybillPageState();
@@ -17,8 +18,10 @@ class _WaybillPageState extends State<WaybillPage> {
   int page = 1;
   int size = 10;
   Map<String, dynamic> actionObj = {};
+  bool _loading = false;
   void initState() { 
     super.initState();
+    _loading = true;
     _getWaybillList();
   }
   @override
@@ -27,49 +30,54 @@ class _WaybillPageState extends State<WaybillPage> {
       appBar: AppBar( centerTitle: true, title: Text('运单列表'), actions: <Widget>[Center(child: InkWell(child: Text('全部运单  ',style: TextStyle(fontSize: ScreenUtil().setSp(32) ),),onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context)=>AllWaybillPage()));
       },),)],),
-      body: Container(
-        child: EasyRefresh(
-          child: waybillList.length > 0
-          ? ListView.builder(
-            itemCount: waybillList.length,
-            itemBuilder: (BuildContext context, int index) {
-            return waybillItem(index);
+      body: ProgressDialog(
+        loading: _loading,
+        msg: '正在加载',
+        child: Container(
+          child: EasyRefresh(
+            child: waybillList.length > 0
+            ? ListView.builder(
+              itemCount: waybillList.length,
+              itemBuilder: (BuildContext context, int index) {
+              return waybillItem(index);
+              },
+            )
+            :Center(child: Padding(child: Text('暂无运单',style: TextStyle(fontSize: ScreenUtil().setSp(40)),),padding: EdgeInsets.only(top: 200))),
+            loadMore: (){
+              _getWaybillList();
             },
-          )
-          :Center(child: Padding(child: Text('暂无运单',style: TextStyle(fontSize: ScreenUtil().setSp(40)),),padding: EdgeInsets.only(top: 200))),
-          loadMore: (){
-            _getWaybillList();
-          },
-          onRefresh: (){
-            page = 1;
-            waybillList = [];
-            _getWaybillList();
-          },
-          refreshFooter: ClassicsFooter(
-            key: _footerKey,
-            bgColor: Colors.white,
-            textColor: Colors.black26,
-            moreInfoColor: Colors.black26,
-            showMore: false,
-            noMoreText: '',
-            moreInfo: ' ',
-            loadText: '上拉加载',
-            loadReadyText: '上拉加载',
-            loadedText: '加载完成',
-            loadingText: '加载中'
-          ),
-          refreshHeader: ClassicsHeader(
-            key: _headerKey,
-            bgColor: Colors.white,
-            textColor: Colors.black26,
-            moreInfoColor: Colors.black26,
-            showMore: true,
-            moreInfo: '加载中',
-            refreshReadyText: '下拉刷新',
-            refreshedText: '刷新完成',
+            onRefresh: (){
+              page = 1;
+              waybillList = [];
+              _getWaybillList();
+            },
+            refreshFooter: ClassicsFooter(
+              key: _footerKey,
+              bgColor: Colors.white,
+              textColor: Colors.black26,
+              moreInfoColor: Colors.black26,
+              showMore: false,
+              noMoreText: '',
+              moreInfo: ' ',
+              loadText: '上拉加载',
+              loadReadyText: '上拉加载',
+              loadedText: '加载完成',
+              loadingText: '加载中'
+            ),
+            refreshHeader: ClassicsHeader(
+              key: _headerKey,
+              bgColor: Colors.white,
+              textColor: Colors.black26,
+              moreInfoColor: Colors.black26,
+              showMore: true,
+              moreInfo: '加载中',
+              refreshReadyText: '下拉刷新',
+              refreshedText: '刷新完成',
+            ),
           ),
         ),
       )
+       
     );
   }
   Widget waybillItem(index) {
@@ -161,6 +169,7 @@ class _WaybillPageState extends State<WaybillPage> {
   _getWaybillList() {//获取运单列表
     String stringParams = '?page=$page&size=$size&waybillStatus=unloading,going';
     getAjax('waybillList', stringParams, context).then((res){
+      _loading = false;
        WaybillListMode waybilllistmode =WaybillListMode.fromJson(res);
       if(waybilllistmode.code == 200 && waybilllistmode.content.length > 0) {
         setState(() {

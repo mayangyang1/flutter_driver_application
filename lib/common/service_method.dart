@@ -83,6 +83,10 @@ Future getAjaxStr(url, stringParams, context) async{
     }
     print(reqUrl);
     response = await dio.get(reqUrl);
+    print(response.data);
+    if(response.data == null || response.data == ''){
+      return null;
+    }
     if(response.data['code'] == 500) {
        Toast.toast(context, response.data['content']);
      

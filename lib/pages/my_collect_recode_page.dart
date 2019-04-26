@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../common/service_method.dart';
-import '../components/toast.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import '../common/util.dart';
+import '../pages/resource_detail_page.dart';
 
 class MyCollectRecodePage extends StatefulWidget {
   @override
@@ -72,24 +72,31 @@ class _MyCollectRecodePageState extends State<MyCollectRecodePage> {
     );
   }
   Widget resourceItem(int index){
-    return Container(
-      margin: EdgeInsets.only(bottom: 10.0),
-      padding: EdgeInsets.all(10.0),
-      // height: 200,
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(width: 1,color: Color(0XFFCCCCCC)),top: BorderSide(width: 1,color: Color(0xFFCCCCCC))),
-        color: Color(0xFFFFFFFF)
+    return InkWell(
+      child: Container(
+        margin: EdgeInsets.only(bottom: 10.0),
+        padding: EdgeInsets.all(10.0),
+        // height: 200,
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(width: 1,color: Color(0XFFCCCCCC)),top: BorderSide(width: 1,color: Color(0xFFCCCCCC))),
+          color: Color(0xFFFFFFFF)
+        ),
+        child: Column(
+          children: <Widget>[
+            lineRouteWidget(index),
+            resourceLists[index]['routeName'] != null
+            ? commonItem('线       路', "${resourceLists[index]['routeName']}")
+            : Text('',style: TextStyle(fontSize: 0)),
+            commonItem('货       品', "${resourceLists[index]['goodsName']}"),
+            commonItem('司机运价',  "${resourceLists[index]['quotePrice']}${unit[resourceLists[index]['meterageType']]['driver.price'][resourceLists[index]['quotePriceUnitCode']]}"),
+          ],
+        ),
       ),
-      child: Column(
-        children: <Widget>[
-          lineRouteWidget(index),
-          resourceLists[index]['routeName'] != null
-          ? commonItem('线       路', "${resourceLists[index]['routeName']}")
-          : Text('',style: TextStyle(fontSize: 0)),
-          commonItem('货       品', "${resourceLists[index]['goodsName']}"),
-          commonItem('司机运价',  "${resourceLists[index]['quotePrice']}${unit[resourceLists[index]['meterageType']]['driver.price'][resourceLists[index]['quotePriceUnitCode']]}"),
-        ],
-      ),
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context){
+          return ResourceDetialPage(code: resourceLists[index]['code'],);
+        }));
+      },
     );
   }
   Widget lineRouteWidget(int index){

@@ -8,6 +8,7 @@ import '../common/util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../mode/resource_list_model.dart';
 import '../pages/resource_detail_page.dart';
+import '../components/progressDialog.dart';
 
 class ResourcePage extends StatefulWidget {
   _ResourcePageState createState() => _ResourcePageState();
@@ -31,8 +32,10 @@ class _ResourcePageState extends State<ResourcePage> {
   String unloadingProvinceCode = '';
   String unloadingCityCode = '';
   String unloadingCountyCode = '';
+  bool _loading = false;
   @override
   void initState() {
+    _loading = true;
     _getFreightList();
     _getConfigOther();
     _getSelfInfo();
@@ -42,43 +45,49 @@ class _ResourcePageState extends State<ResourcePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('货源大厅'),),
-      body: Container(
-        color: Color(0XFFF2F2F2),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            searchBar(
-              context,
-              singlePickerList,
-              _index,
-              (val){//搜索框
-              print(val);
-                loadingProvinceCode = val['startCodeMap'] != null? val['startCodeMap']['provinceCode'] : '';
-                loadingCityCode = val['startCodeMap'] !=null? val['startCodeMap']['cityCode'] : '';
-                loadingCountyCode = val['startCodeMap'] != null? val['startCodeMap']['areaCode'] : '';
-                unloadingProvinceCode = val['endCodeMap'] != null? val['endCodeMap']['provinceCode'] : '';
-                unloadingCityCode = val['endCodeMap'] != null? val['endCodeMap']['cityCode'] : '';
-                unloadingCountyCode = val['endCodeMap'] != null? val['endCodeMap']['areaCode'] : '';
-                goodsName = val['goodsName'];
-                page = 1;
-                resourceLists = [];
-                _getFreightList();
-              },
-              (val){//切换货源
-                setState(() {
-                  _index = val['value'];
-                });
-                page = 1;
-                resourceLists = [];
-                _getFreightList();
-              }
-            ),
-            Expanded(
-              child: resourceList(),
-            )
-          ],
+      body: ProgressDialog(
+        loading: _loading,
+        msg: '正在加载',
+        child: Container(
+          color: Color(0XFFF2F2F2),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              searchBar(
+                context,
+                singlePickerList,
+                _index,
+                (val){//搜索框
+                print(val);
+                  loadingProvinceCode = val['startCodeMap'] != null? val['startCodeMap']['provinceCode'] : '';
+                  loadingCityCode = val['startCodeMap'] !=null? val['startCodeMap']['cityCode'] : '';
+                  loadingCountyCode = val['startCodeMap'] != null? val['startCodeMap']['areaCode'] : '';
+                  unloadingProvinceCode = val['endCodeMap'] != null? val['endCodeMap']['provinceCode'] : '';
+                  unloadingCityCode = val['endCodeMap'] != null? val['endCodeMap']['cityCode'] : '';
+                  unloadingCountyCode = val['endCodeMap'] != null? val['endCodeMap']['areaCode'] : '';
+                  goodsName = val['goodsName'];
+                  page = 1;
+                  resourceLists = [];
+                  _getFreightList();
+                },
+                (val){//切换货源
+                  setState(() {
+                    _index = val['value'];
+                  });
+                  page = 1;
+                  resourceLists = [];
+                  _getFreightList();
+                }
+              ),
+              Expanded(
+                child: resourceList(),
+              )
+            ],
+          ),
         ),
-      ),
+      )
+      
+      
     );
   }
   Widget resourceList() {
@@ -224,6 +233,7 @@ class _ResourcePageState extends State<ResourcePage> {
 
     getAjax('apiFreightlist', stringParams, context).then((res){
       // var data = json.decode(res.toString());
+      _loading = false;
       ResourceListMode resourceListMode =ResourceListMode.fromJson(res);
       if(resourceListMode.code == 200 && resourceListMode.content.length > 0) {
         setState(() {

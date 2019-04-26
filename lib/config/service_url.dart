@@ -37,4 +37,5 @@ const servicePath = {
   'truckEdite': '$serviceUrl/driver-api/driver-api/truck/edit',//更新主车
   'trailerInfo': '$serviceUrl//driver-api/driver-api/trailer_truck/get', //查询挂车信息
   'searchTruckInfo': '$serviceUrl/driver-api/driver-api/truck/all/list',//查询车牌号
+  'collectRecordAdd' : '$serviceUrl/driver-api/driver-api/driver_api_collect_record/add',//收藏货源
 };
