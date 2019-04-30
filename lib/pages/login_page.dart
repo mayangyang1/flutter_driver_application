@@ -5,6 +5,7 @@ import 'dart:io';
 import '../common/util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../pages/find_password.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -71,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
       width: 200.0,
       margin: EdgeInsets.only(top: 60.0,bottom: 40.0),
       child: Center(
-        child: Image.asset('assets/images/logo.png'),
+        child: Image.asset('assets/images/logo.png',width: ScreenUtil().setWidth(340),),
       )
     );
   }
@@ -80,13 +81,13 @@ class _LoginPageState extends State<LoginPage> {
       child: Center(
         child: Column(
           children: <Widget>[
-            _inputWidget(userNameController, '请输入用户名', false , 'number', (res){
+            _inputWidget(userNameController, 'assets/images/users.png', '请输入用户名', false , 'number', (res){
               setState(() {
                 print(res);
                userName = res; 
               });
             }),
-            _inputWidget(passwordController, '请输入密码', true, 'text', (res){
+            _inputWidget(passwordController,'assets/images/password.png', '请输入密码', true, 'text', (res){
               setState(() {
                password = res; 
               });
@@ -94,14 +95,14 @@ class _LoginPageState extends State<LoginPage> {
             InkWell(
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: 50.0,
+                height: ScreenUtil().setHeight(100),
                 margin: EdgeInsets.only(top: 20.0,  left: 20.0,right: 20.0),
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(5)
                 ),
                 child: Center(
-                  child: Text('登录', style:TextStyle(fontSize: 26.0,color: Colors.white)),
+                  child: Text('登录', style:TextStyle(fontSize: ScreenUtil().setSp(40),color: Colors.white)),
                 ),
               ),
               onTap: (){
@@ -115,13 +116,13 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   InkWell(
-                    child: Text('立即注册', style: TextStyle(fontSize: 18,color: Colors.black26),),
+                    child: Text('立即注册', style: TextStyle(fontSize: ScreenUtil().setSp(32),color: Colors.black26),),
                     onTap: (){
                       Navigator.pushNamed(context, '/register');
                     },
                   ),
                   InkWell(
-                    child: Text('找回密码', style: TextStyle(fontSize: 18,color: Colors.black26),),
+                    child: Text('找回密码', style: TextStyle(fontSize: ScreenUtil().setSp(32),color: Colors.black26),),
                     onTap: (){
                       print('点击');
                       Navigator.push(context, MaterialPageRoute(builder: (context){
@@ -137,32 +138,40 @@ class _LoginPageState extends State<LoginPage> {
       )
     );
   }
-  Widget _inputWidget(TextEditingController controller, String hintText, bool obscureText, String inputType, Function change){
+  Widget _inputWidget(TextEditingController controller, String imgUrl, String hintText, bool obscureText, String inputType, Function change){
     return Container(
       margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
       padding: EdgeInsets.only(left: 5.0),
       decoration: BoxDecoration(
-        border: Border.all(width: 1.0, color: Colors.black54),
+        border: Border.all(width: 1.0, color: Color(0xFFCCCCCC)),
         borderRadius: BorderRadius.circular(5.0)
       ),
-      child: TextField(
-        controller: controller,
-        decoration: InputDecoration(
-          hintText: hintText,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(3.0),
-            borderSide: BorderSide(color: Colors.transparent)
-          ),
-          disabledBorder: InputBorder.none,
-          enabledBorder:InputBorder.none,
-          focusedBorder:InputBorder.none
-        ),
-        cursorColor: Colors.black,
-        obscureText: obscureText,
-        keyboardType:inputType == 'number'? TextInputType.number : TextInputType.text,
-        onChanged: (text){
-          return change(text);
-        },
+      child: Row(
+        children: <Widget>[
+          Image.asset(imgUrl,width: ScreenUtil().setWidth(60),),
+          Padding(child: null,padding: EdgeInsets.only(left: 10),),
+          Expanded(
+            child: TextField(
+              controller: controller,
+              decoration: InputDecoration(
+                hintText: hintText,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(3.0),
+                  borderSide: BorderSide(color: Colors.transparent)
+                ),
+                disabledBorder: InputBorder.none,
+                enabledBorder:InputBorder.none,
+                focusedBorder:InputBorder.none
+              ),
+              cursorColor: Colors.black,
+              obscureText: obscureText,
+              keyboardType:inputType == 'number'? TextInputType.number : TextInputType.text,
+              onChanged: (text){
+                return change(text);
+              },
+            ),
+          )
+        ],
       ),
     );
   }

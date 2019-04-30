@@ -69,6 +69,9 @@ flutter:
    - assets/images/going.png
    - assets/images/transportation.png
    - assets/images/waitingLoading.png
+   - assets/images/password.png
+   - assets/images/users.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 

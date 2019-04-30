@@ -37,7 +37,7 @@ class _WaybillPageState extends State<WaybillPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( centerTitle: true, title: Text('运单列表'), actions: <Widget>[Center(child: InkWell(child: Text('历史运单  ',style: TextStyle(fontSize: ScreenUtil().setSp(32) ),),onTap: (){
+      appBar: AppBar( title: Text('运单列表'), actions: <Widget>[Center(child: InkWell(child: Text('历史运单  ',style: TextStyle(fontSize: ScreenUtil().setSp(32) ),),onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context)=>AllWaybillPage()));
       },),)],),
       body: ProgressDialog(
@@ -337,6 +337,7 @@ class _WaybillPageState extends State<WaybillPage> {
     urls = '';
     firstParty = '';
     actionObj = {};
+    _loading = false;
     super.dispose();
   }
   

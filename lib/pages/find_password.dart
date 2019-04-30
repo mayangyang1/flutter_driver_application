@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../common/service_method.dart';
 import '../components/toast.dart';
-import 'dart:convert';
 import 'dart:async';
 
 class FindPassword extends StatefulWidget {
@@ -35,7 +34,7 @@ class _FindPasswordState extends State<FindPassword> {
               padding: EdgeInsets.only(left: 10,),
               height: ScreenUtil().setHeight(100),
               decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(width: 1, color: Colors.black45)),
+                border: Border(bottom: BorderSide(width: 1, color: Color(0xFFCCCCCC))),
                 color: Color(0xFFFFFFFF)
               ),
               child: Row(
@@ -106,7 +105,7 @@ class _FindPasswordState extends State<FindPassword> {
       padding: EdgeInsets.only(left: 10, right:10),
       height: ScreenUtil().setHeight(100),
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(width: 1, color: Colors.black45)),
+        border: Border(bottom: BorderSide(width: 1, color: Color(0xFFCCCCCC))),
         color: Color(0xFFFFFFFF)
       ),
       child: Row(

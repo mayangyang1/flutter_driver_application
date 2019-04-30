@@ -417,7 +417,7 @@ class _MainVehiclePageState extends State<MainVehiclePage> {
         newArrList.add(cardFront);
         Map cardAfter = {};
         cardAfter['attachmentName'] = '行驶证第二联';
-        cardAfter['attachmentResourceCode'] = attachmentResourceCode[1];
+        cardAfter['attachmentResourceCode'] = attachmentResourceCode.length > 1? attachmentResourceCode[1] : '';
         newArrList.add(cardAfter);
       }
       if (_item['attachmentName'] == '运输证') {
@@ -428,7 +428,7 @@ class _MainVehiclePageState extends State<MainVehiclePage> {
         newArrList.add(driverOne);
         Map driverTwo = {};
         driverTwo['attachmentName'] = '运输证第二联';
-        driverTwo['attachmentResourceCode'] = attachmentResourceCode[1];
+        driverTwo['attachmentResourceCode'] = attachmentResourceCode.length > 1? attachmentResourceCode[1] :'';
         newArrList.add(driverTwo);
       }
     });

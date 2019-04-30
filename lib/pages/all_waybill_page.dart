@@ -27,7 +27,7 @@ class _AllWaybillPageState extends State<AllWaybillPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( centerTitle: true, title: Text('运单列表')),
+      appBar: AppBar( title: Text('运单列表')),
       body: ProgressDialog(
         loading: _loading,
         msg: '正在加载',

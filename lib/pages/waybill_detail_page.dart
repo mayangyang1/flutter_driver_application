@@ -488,16 +488,12 @@ class _WaybillDetailPageState extends State<WaybillDetailPage> {
      _loading = true; 
     });
     var times =DateTime.now().toString().split('.')[0];
-    print(times);
     Map<String, dynamic> params = {};
     params['code'] = code;
     params['driverConfirmTime'] = times;
     postAjax('waybillAccepy', params, context).then((res){
       _loading = false;
       if(res['code'] == 200) {
-        setState(() {
-          _loading = true;
-        });
         waybillDetailObj = null;
         _getWaybillDetailInfo();
       }
