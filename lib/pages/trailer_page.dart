@@ -63,8 +63,8 @@ class _TrailerPageState extends State<TrailerPage> {
   ];
   int licensePlateIndex = 0;
   int truckModeIndex = 0;
-  bool canEdite = false;
-  Map mainTruckObj = {};
+  bool canEdite = true;
+  Map<String, dynamic> mainTruckObj = {};
   String truckModelCode = ''; //车型
   String truckLicenseType = ''; //牌照类型
   int attachIndex = 0;
@@ -331,6 +331,9 @@ class _TrailerPageState extends State<TrailerPage> {
   }
   _getTrailerPageMessage() {//获取挂车辆信息
     getAjax('trailerInfo', '?platformTruckCode=${widget.truckCode}', context).then((res){
+      if(res == null){
+        return ;
+      }
       if(res['code'] == 200 && res['content'].length > 0) {
         mainTruckObj = res['content'];
 
@@ -352,29 +355,29 @@ class _TrailerPageState extends State<TrailerPage> {
 
         Map truckObj = {};
         truckObj['attachmentName'] = '行驶证';
-        truckObj['attachmentResourceCode'] = mainTruckObj['drivingLicenseRecourseCode'];
+        truckObj['attachmentResourceCode'] = mainTruckObj['drivingLicenseRecourseCode']?? '';
         Map transportObj = {};
         transportObj['attachmentName'] = '运输证';
-        transportObj['attachmentResourceCode'] = mainTruckObj['transportLicenseRecourseCode'];
+        transportObj['attachmentResourceCode'] = mainTruckObj['transportLicenseRecourseCode']?? '';
         List truckAttachmentsList = [];
         truckAttachmentsList
         ..add(truckObj)
         ..add(transportObj);
         _attachment(truckAttachmentsList);
-
         setState(() {
-         carNumberController.text = mainTruckObj['truckLicenseNo'];
-         carTypeController.text = mainTruckObj['truckModelName'];
-         carLengthController.text = mainTruckObj['truckLength'].toString();
-         carWeigthController.text = mainTruckObj['regTonnage'].toString();
-         numberTypeController.text = licensePlate[mainTruckObj['truckLicenseType']];
-         transportNumberController.text = mainTruckObj['transportLicenseNo'];
+         carNumberController.text = mainTruckObj['truckLicenseNo']??'';
+         carTypeController.text = mainTruckObj['truckModelName']??'';
+         carLengthController.text = mainTruckObj['truckLength'] != null? mainTruckObj['truckLength'].toString() :'';
+         carWeigthController.text = mainTruckObj['regTonnage'] != null? mainTruckObj['regTonnage'].toString() : '';
+         numberTypeController.text = licensePlate[mainTruckObj['truckLicenseType']]??'';
+         transportNumberController.text = mainTruckObj['transportLicenseNo']??'';
          
          canEdite = mainTruckObj['certStatus'] == 'authenticating' || mainTruckObj['certStatus'] == 'authenticated'? false : true;
         });
-        truckModelCode = mainTruckObj['truckModelCode'];
-        truckLicenseType = mainTruckObj['truckLicenseType'];
-        code =mainTruckObj['code'];
+        truckModelCode = mainTruckObj['truckModelCode']??'';
+        truckLicenseType = mainTruckObj['truckLicenseType']??'';
+        code = mainTruckObj['truckCode']??'';
+        print(code);
       }else{
         code = '';
       }
@@ -472,7 +475,8 @@ class _TrailerPageState extends State<TrailerPage> {
     params['transportLicenseRecourseCode'] = transportLicenseRecourseCodeList.join(':');
     params['isTrailer'] = true;
     params.forEach((key,values){
-      mainTruckObj.update(key, (value)=>values);
+      mainTruckObj[key] = values;
+      // mainTruckObj.update(key, (value)=>values);
     });
     params = mainTruckObj;
     String url = '';

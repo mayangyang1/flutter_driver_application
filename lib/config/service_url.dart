@@ -38,4 +38,8 @@ const servicePath = {
   'trailerInfo': '$serviceUrl//driver-api/driver-api/trailer_truck/get', //查询挂车信息
   'searchTruckInfo': '$serviceUrl/driver-api/driver-api/truck/all/list',//查询车牌号
   'collectRecordAdd' : '$serviceUrl/driver-api/driver-api/driver_api_collect_record/add',//收藏货源
+  'waybillAccepy' : '$serviceUrl/driver-api/driver-api/waybill/accept', //确认运单
+  'waybillRefuse' : '$serviceUrl/driver-api/driver-api/waybill/reject', //拒绝运单
+  'waybillCancel' : '$serviceUrl/driver-api/driver-api/waybill/cancel',//取消运单
+  'actionList' : '$serviceUrl/driver-api/driverApi/action/list',//获取业务动作列表
 };

@@ -180,6 +180,9 @@ class _BusinessCardPageState extends State<BusinessCardPage> {
   }
   _getSelfInfo()async {//获取司机信息
     getAjax('selfInfo', '', context).then((res){
+      if(res == null) {
+        return ;
+      }
       SelfInfoMode selfObj = SelfInfoMode.fromJson(res);
       if(selfObj.code == 200) {
         String statusName = '未提交认证';
@@ -200,6 +203,9 @@ class _BusinessCardPageState extends State<BusinessCardPage> {
   }
   _getMainTruckMessage() {//获取主车信息
     getAjax('mainTruckMessage', '?size=1', context).then((res){
+      if(res == null) {
+        return;
+      }
       MainTruckListMode mainTruckInfo =MainTruckListMode.fromJson(res);
       if(mainTruckInfo.code == 200 && mainTruckInfo.content.length > 0) {
         String statusName = '未提交认证';
@@ -227,6 +233,9 @@ class _BusinessCardPageState extends State<BusinessCardPage> {
   _getTrailerTruckMessage(truckCode) {//获取挂车信息
      String stringParams = '?platformTruckCode=$truckCode';
     getAjax('trailerTruckMessage', stringParams, context).then((res){
+      if(res == null) {
+        return ;
+      }
       TrialerTruckMode trialerTruckMode = TrialerTruckMode.fromJson(res);
       if(trialerTruckMode.code == 200) {
         String statusName = '未提交认证';

@@ -229,6 +229,7 @@ class _ResourceDetialPageState extends State<ResourceDetialPage> {
   }
   Widget headerTitle(String title) {
     return Container(
+       width: MediaQuery.of(context).size.width,
       color: Color(0xFFF2F2F2),
       height: ScreenUtil().setHeight(80),
       padding: EdgeInsets.only(left: 10),
@@ -555,6 +556,7 @@ class _ResourceDetialPageState extends State<ResourceDetialPage> {
  _getCollectReocrd(freightCode) {
   getAjaxStr('$serviceUrl/driver-api/driver-api/driver_api_collect_record/1/$freightCode/get', '', context).then((res){
     if(res != null){
+      collectCode = res['content']['code'];
       setState(() {
        isCollect = true; 
       });

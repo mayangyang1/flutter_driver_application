@@ -24,6 +24,9 @@ Future getAjax(url, stringParams, context) async{
     print(reqUrl);
     response = await dio.get(reqUrl);
     print(response);
+    if(response.data == null || response.data == ''){
+      return null;
+    }
     if(response.data['code'] == 500) {
        Toast.toast(context, response.data['content']);
     }else if(response.data['code'] == 401) {
@@ -51,6 +54,9 @@ Future postAjax(String url, Map<String, dynamic>params,  BuildContext context) a
     dio.options.contentType = ContentType.parse("application/x-www-form-urlencoded");
     dio.options.headers['Cookie'] = cookies;
     response = await dio.post(servicePath[url], data:params);
+    if(response.data == null || response.data == ''){
+      return null;
+    }
     if(response.data['code'] == 500) {
       Toast.toast(context, response.data['content']);
     }else if(response.data['code'] == 401) {
@@ -114,6 +120,9 @@ Future postAjaxStr(url, params, context) async {
     dio.options.contentType = ContentType.parse("application/x-www-form-urlencoded");
     dio.options.headers['Cookie'] = cookies;
     response = await dio.post(url, data:params);
+    if(response.data == null || response.data == ''){
+      return null;
+    }
     if(response.data['code'] == 500) {
       Toast.toast(context, response.data['content']);
      
@@ -140,6 +149,9 @@ Future uploaFile(url, FormData formData, context) async {
     dio.options.contentType = ContentType.parse("application/x-www-form-urlencoded");
     dio.options.headers['Cookie'] = cookies;
     response = await dio.post(servicePath[url], data:formData);
+    if(response.data == null || response.data == ''){
+      return null;
+    }
     if(response.data['code'] == 500) {
       Toast.toast(context, response.data['content']);
     }else if(response.data['code'] == 401) {

@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:dio/dio.dart';
 import 'dart:async';
 import 'dart:io';
-import 'package:photo_view/photo_view.dart';
+import '../common/fullScreenWrapper.dart';
 import '../config/service_url.dart';
 import '../components/single_picker.dart';
 import '../components/toast.dart';
@@ -302,13 +302,13 @@ class _DriverInfoPageState extends State<DriverInfoPage> {
         driverInfo = res['content'];
         Map identityObj = {};
         identityObj['attachmentName'] = '身份证';
-        identityObj['attachmentResourceCode'] = driverInfo['identityResourceCode'];
+        identityObj['attachmentResourceCode'] = driverInfo['identityResourceCode'] == null? '': driverInfo['identityResourceCode'];
         Map driverLicenseObj = {};
         driverLicenseObj['attachmentName'] = '驾驶证';
-        driverLicenseObj['attachmentResourceCode'] = driverInfo['driverLicenseResourceCode'];
+        driverLicenseObj['attachmentResourceCode'] = driverInfo['driverLicenseResourceCode']!=null? driverInfo['driverLicenseResourceCode'] : '';
         Map qualificationObj = {};
         qualificationObj['attachmentName'] = '从业资格证';
-        qualificationObj['attachmentResourceCode'] = driverInfo['qualificationCertificateResourceCode'];
+        qualificationObj['attachmentResourceCode'] = driverInfo['qualificationCertificateResourceCode'] != null? driverInfo['qualificationCertificateResourceCode'] : '';
         List personAttachment = [];
         personAttachment.add(identityObj);
         personAttachment.add(driverLicenseObj);
@@ -324,7 +324,7 @@ class _DriverInfoPageState extends State<DriverInfoPage> {
         setState(() {
           userNameController.text = driverInfo['fullName'];
           userSexController.text = driverInfo['gender'] == 'female'? '男' : '女';
-          genderIndex = driverInfo['gender'] == 'female'? 0 : 1;
+          genderIndex = driverInfo['gender'] == 'male'? 0 : 1;
           userIdentityController.text = driverInfo['identityNumber'];
           userCarTypeController.text = driverInfo['driverLicenseAcceptType'];
           userdriverNumberController.text = driverInfo['driverLicenseNo'];
@@ -347,7 +347,7 @@ class _DriverInfoPageState extends State<DriverInfoPage> {
         newArrList.add(cardFront);
         Map cardAfter = {};
         cardAfter['attachmentName'] = '身份证反面';
-        cardAfter['attachmentResourceCode'] = attachmentResourceCode[1];
+        cardAfter['attachmentResourceCode'] = attachmentResourceCode.length > 1? attachmentResourceCode[1] : '';
         newArrList.add(cardAfter);
       }
       if (_item['attachmentName'] == '驾驶证') {
@@ -358,7 +358,7 @@ class _DriverInfoPageState extends State<DriverInfoPage> {
         newArrList.add(driverOne);
         Map driverTwo = {};
         driverTwo['attachmentName'] = '驾驶证第二联照片';
-        driverTwo['attachmentResourceCode'] = attachmentResourceCode[1];
+        driverTwo['attachmentResourceCode'] = attachmentResourceCode.length > 1? attachmentResourceCode[1] : '';
         newArrList.add(driverTwo);
       }
       if (_item['attachmentName'] == '从业资格证') {
@@ -442,7 +442,8 @@ class _DriverInfoPageState extends State<DriverInfoPage> {
     }
 
     params.forEach((key,values){
-      driverInfo.update(key, (value)=>values);
+      driverInfo[key] = values;
+      // driverInfo.update(key, (value)=>values);
     });
     params = driverInfo;
     postAjax('personalSelfEdit', params, context).then((res){
@@ -529,42 +530,5 @@ class _DriverInfoPageState extends State<DriverInfoPage> {
   void dispose() {
     attachmentsObj = {};
     super.dispose();
-  }
-}
-
-
-class FullScreenWrapper extends StatelessWidget {
-  const FullScreenWrapper(
-      {this.imageProvider,
-      this.loadingChild,
-      this.backgroundDecoration,
-      this.minScale,
-      this.maxScale,
-      this.initialScale,
-      this.basePosition = Alignment.center});
-
-  final ImageProvider imageProvider;
-  final Widget loadingChild;
-  final Decoration backgroundDecoration;
-  final dynamic minScale;
-  final dynamic maxScale;
-  final dynamic initialScale;
-  final Alignment basePosition;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-    constraints: BoxConstraints.expand(
-      height: MediaQuery.of(context).size.height,
-    ),
-    child: PhotoView(
-      imageProvider: imageProvider,
-      loadingChild: loadingChild,
-      backgroundDecoration: backgroundDecoration,
-      minScale: minScale,
-      maxScale: maxScale,
-      initialScale: initialScale,
-      basePosition: basePosition,
-    ));
   }
 }

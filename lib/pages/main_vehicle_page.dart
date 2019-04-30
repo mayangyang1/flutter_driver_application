@@ -67,8 +67,8 @@ class _MainVehiclePageState extends State<MainVehiclePage> {
   int licensePlateIndex = 0;
   int powerTypeIndex = 0;
   int truckModeIndex = 0;
-  bool canEdite = false;
-  Map mainTruckObj = {};
+  bool canEdite = true;
+  Map<String, dynamic> mainTruckObj = {};
   String truckModelCode = ''; //车型
   String powerType = '';//动力类型
   String truckLicenseType = ''; //牌照类型
@@ -375,10 +375,10 @@ class _MainVehiclePageState extends State<MainVehiclePage> {
 
         Map truckObj = {};
         truckObj['attachmentName'] = '行驶证';
-        truckObj['attachmentResourceCode'] = mainTruckObj['drivingLicenseRecourseCode'];
+        truckObj['attachmentResourceCode'] = mainTruckObj['drivingLicenseRecourseCode'] != null? mainTruckObj['drivingLicenseRecourseCode'] : '';
         Map transportObj = {};
         transportObj['attachmentName'] = '运输证';
-        transportObj['attachmentResourceCode'] = mainTruckObj['transportLicenseRecourseCode'];
+        transportObj['attachmentResourceCode'] = mainTruckObj['transportLicenseRecourseCode'] != null? mainTruckObj['transportLicenseRecourseCode'] : '';
         List truckAttachmentsList = [];
         truckAttachmentsList
         ..add(truckObj)
@@ -386,13 +386,13 @@ class _MainVehiclePageState extends State<MainVehiclePage> {
         _attachment(truckAttachmentsList);
 
         setState(() {
-         carNumberController.text = mainTruckObj['truckLicenseNo'];
-         carTypeController.text = mainTruckObj['truckModelName'];
-         carLengthController.text = mainTruckObj['truckLength'].toString();
-         carWeigthController.text = mainTruckObj['regTonnage'].toString();
-         powerTypeController.text = powerTypeMap[mainTruckObj['powerType']];
-         numberTypeController.text = licensePlate[mainTruckObj['truckLicenseType']];
-         transportNumberController.text = mainTruckObj['transportLicenseNo'];
+         carNumberController.text = mainTruckObj['truckLicenseNo']?? '';
+         carTypeController.text = mainTruckObj['truckModelName']?? '';
+         carLengthController.text = mainTruckObj['truckLength'] != null? mainTruckObj['truckLength'].toString() : '';
+         carWeigthController.text = mainTruckObj['regTonnage'] != null? mainTruckObj['regTonnage'].toString() : '';
+         powerTypeController.text = powerTypeMap[mainTruckObj['powerType']]??'';
+         numberTypeController.text = licensePlate[mainTruckObj['truckLicenseType']]?? '';
+         transportNumberController.text = mainTruckObj['transportLicenseNo']?? '';
          
          canEdite = mainTruckObj['certStatus'] == 'authenticating' || mainTruckObj['certStatus'] == 'authenticated'? false : true;
         });
@@ -498,7 +498,8 @@ class _MainVehiclePageState extends State<MainVehiclePage> {
     params['transportLicenseRecourseCode'] = transportLicenseRecourseCodeList.join(':');
 
     params.forEach((key,values){
-      mainTruckObj.update(key, (value)=>values);
+      mainTruckObj[key] = values;
+      // mainTruckObj.update(key, (value)=>values);
     });
     params = mainTruckObj;
     String url = '';
