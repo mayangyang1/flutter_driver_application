@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-dataPicker(BuildContext context, times) {
+dataPicker(BuildContext context, times, Function change) {
   return showCupertinoModalPopup(
     context: context,
     builder: (BuildContext context) {
-      return DatePicker(times: times,);
+      return DatePicker(times: times, change:change);
     },
   );
 }
 
 class DatePicker extends StatefulWidget {
   final String  times;
-  DatePicker({Key key, this.times}) :super(key:key);
+  final Function change;
+  DatePicker({Key key, this.times, this.change}) :super(key:key);
   _DatePickerState createState() => _DatePickerState();
 }
 
@@ -188,6 +189,7 @@ class _DatePickerState extends State<DatePicker> {
     String minute = minuteList[minuteIndex].substring(0, 2); 
     selectTimes = '$year-$month-$day $hour:$minute:00';
     print(selectTimes);
+    widget.change(selectTimes);
   }
   _changeMonth(index){
     setState(() {

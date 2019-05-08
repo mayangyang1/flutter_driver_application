@@ -538,8 +538,6 @@ class _TrailerPageState extends State<TrailerPage> {
             Future.delayed(Duration(milliseconds: 1000),()=>Navigator.pop(context));
           }
         });
-        
-
       }
     });
   }

@@ -27,7 +27,7 @@ class _AllWaybillPageState extends State<AllWaybillPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( title: Text('运单列表')),
+      appBar: AppBar( title: Text('历史运单')),
       body: ProgressDialog(
         loading: _loading,
         msg: '正在加载',
@@ -55,7 +55,7 @@ class _AllWaybillPageState extends State<AllWaybillPage> {
               textColor: Colors.black26,
               moreInfoColor: Colors.black26,
               showMore: false,
-              noMoreText: '',
+              noMoreText: '没有更多',
               moreInfo: ' ',
               loadText: '上拉加载',
               loadReadyText: '上拉加载',

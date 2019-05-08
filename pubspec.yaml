@@ -27,6 +27,7 @@ dependencies:
   shared_preferences: ^0.5.1
   photo_view: ^0.2.4
   image_picker: ^0.5.2
+  amap_location: ^0.2.0
 
 
 dev_dependencies:

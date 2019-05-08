@@ -11,6 +11,7 @@ import '../components/show_modal.dart';
 import '../components/toast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+import '../pages/collection_and_delivery_page.dart';
 
 
 class WaybillDetailPage extends StatefulWidget {
@@ -46,7 +47,7 @@ class _WaybillDetailPageState extends State<WaybillDetailPage> {
         child: Stack(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(actionList.length > 0?240 : 10)),
+              padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(setHeight())),
               child: SingleChildScrollView(
                 child: Container(
                   child: Column(
@@ -74,6 +75,15 @@ class _WaybillDetailPageState extends State<WaybillDetailPage> {
         )
       )
     );
+  }
+  setHeight() {
+    if(actionList.length <= 0) {
+      return 10;
+    }else if(actionList.length  == 1 && actionList[0]['actionCode'] == 'waybillDriverUnloading'){
+      return 120;
+    }else{
+      return 240;
+    }
   }
    Widget consignorCompany(){
     return Container(
@@ -447,6 +457,10 @@ class _WaybillDetailPageState extends State<WaybillDetailPage> {
         setState(() {
           actionList = res['content'][code]; 
         });
+      }else{
+        setState(() {
+         actionList = []; 
+        });
       }
     });
   }
@@ -464,10 +478,35 @@ class _WaybillDetailPageState extends State<WaybillDetailPage> {
         }));
       }else{
         if(item['actionCode'] == 'waybillDriverLoading'){//装货
-         buttonlist.insert(0,commonButton('装货', 'mainColor', (){}));
+         buttonlist.insert(0,commonButton('装货', 'mainColor', (){
+           print('装货');
+           Navigator.push(context, MaterialPageRoute(builder: (context){
+             return CollectionAndDeliveryPage(code: code, type: 0,);
+           })).then((res){
+             if(res == 'loading'){
+                setState(() {
+                 _loading = true; 
+                });
+                waybillDetailObj = null;
+                _getWaybillDetailInfo();
+              }
+           });
+         }));
         }
         if(item['actionCode'] == 'waybillDriverUnloading'){//卸货
-         buttonlist.insert(0,commonButton('装货', 'mainColor', (){}));
+         buttonlist.insert(0,commonButton('卸货', 'mainColor', (){
+           Navigator.push(context, MaterialPageRoute(builder: (context){
+             return CollectionAndDeliveryPage(code: code, type: 1);
+           })).then((res){
+             if(res == 'unloading'){
+                setState(() {
+                 _loading = true; 
+                });
+                waybillDetailObj = null;
+                _getWaybillDetailInfo();
+              }
+           });
+         }));
         }
         if(item['actionCode'] == 'waybillDriverAccept'){//确认运单
           buttonlist.insert(0,commonButton('确认运单', 'mainColor', (){
@@ -547,6 +586,9 @@ class _WaybillDetailPageState extends State<WaybillDetailPage> {
     loadingImageList = [];
     unloadingImageList = [];
     actionList = [];
+    urlName = '';
+    urls = '';
+    firstParty = '';
     super.dispose();
   }
 }

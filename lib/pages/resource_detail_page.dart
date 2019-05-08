@@ -596,6 +596,7 @@ class _ResourceDetialPageState extends State<ResourceDetialPage> {
     urlName = '';
     urls = '';
     collectCode = '';
+    truckLicenseNo = '';
     super.dispose();
   }
 

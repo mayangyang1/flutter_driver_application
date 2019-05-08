@@ -115,7 +115,7 @@ class _ResourcePageState extends State<ResourcePage> {
         textColor: Colors.black26,
         moreInfoColor: Colors.black26,
         showMore: false,
-        noMoreText: '',
+        noMoreText: '没有更多',
         moreInfo: ' ',
         loadText: '上拉加载',
         loadReadyText: '上拉加载',

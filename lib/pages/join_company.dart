@@ -242,6 +242,7 @@ class _JoinCompanyPageState extends State<JoinCompanyPage> {
         setState(() {
           searchResultList = [];
           companyController.text = '';
+          orgCode = '';
         });
         _getJoinCompanyList();
 

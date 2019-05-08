@@ -12,6 +12,7 @@ import '../components/toast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../components/show_modal.dart';
+import '../pages/collection_and_delivery_page.dart';
 
 class WaybillPage extends StatefulWidget {
   _WaybillPageState createState() => _WaybillPageState();
@@ -67,8 +68,8 @@ class _WaybillPageState extends State<WaybillPage> {
               textColor: Colors.black26,
               moreInfoColor: Colors.black26,
               showMore: false,
-              noMoreText: '',
-              moreInfo: ' ',
+              noMoreText: '没有更多',
+              moreInfo: '',
               loadText: '上拉加载',
               loadReadyText: '上拉加载',
               loadedText: '加载完成',
@@ -187,7 +188,7 @@ class _WaybillPageState extends State<WaybillPage> {
     String stringParams = '?page=$page&size=$size&waybillStatus=unloading,going&sort_driverConfirmStatus=asc&sort_id=desc';
     getAjax('waybillList', stringParams, context).then((res){
       setState(() {
-        _loading = false;
+        _loading = false; 
       });
        WaybillListMode waybilllistmode =WaybillListMode.fromJson(res);
       if(waybilllistmode.code == 200 && waybilllistmode.content.length > 0) {
@@ -236,14 +237,37 @@ class _WaybillPageState extends State<WaybillPage> {
       }else{
         if(item['actionCode'] == 'waybillDriverLoading'){//装货
           buttonlist.add(Padding(child: minButton('装货', true, () {
+            Navigator.push(context, MaterialPageRoute(builder: (context){
+             return CollectionAndDeliveryPage(code: code, type: 0,);
+           })).then((res){
+            if(res == 'loading'){
+              setState(() {
+               _loading = true; 
+              });
+              page = 1;
+              waybillList = [];
+              _getWaybillList();
+            }
             
+           });
           
           }),padding: EdgeInsets.only(left: 10),));
         }
         if(item['actionCode'] == 'waybillDriverUnloading'){//卸货
           buttonlist.add(Padding(child: minButton('卸货', true, () {
             
-          
+          Navigator.push(context, MaterialPageRoute(builder: (context){
+             return CollectionAndDeliveryPage(code: code, type: 1,);
+           })).then((res){
+            if(res == 'unloading'){
+              setState(() {
+              _loading = true; 
+              });
+              page =1;
+              waybillList = [];
+              _getWaybillList();
+            }
+           });
           }),padding: EdgeInsets.only(left: 10),));
         }
         if(item['actionCode'] == 'waybillDriverAccept'){//确认运单

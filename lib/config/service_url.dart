@@ -42,4 +42,6 @@ const servicePath = {
   'waybillRefuse' : '$serviceUrl/driver-api/driver-api/waybill/reject', //拒绝运单
   'waybillCancel' : '$serviceUrl/driver-api/driver-api/waybill/cancel',//取消运单
   'actionList' : '$serviceUrl/driver-api/driverApi/action/list',//获取业务动作列表
+  'waybillLoading' : '$serviceUrl/driver-api/driver-api/waybill/loading',//装货
+  'waybillUnloading' : '$serviceUrl/driver-api/driver-api/waybill/unloading',//卸货
 };
