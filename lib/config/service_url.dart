@@ -44,4 +44,13 @@ const servicePath = {
   'actionList' : '$serviceUrl/driver-api/driverApi/action/list',//获取业务动作列表
   'waybillLoading' : '$serviceUrl/driver-api/driver-api/waybill/loading',//装货
   'waybillUnloading' : '$serviceUrl/driver-api/driver-api/waybill/unloading',//卸货
+  'mobileUserMoney' : '$serviceUrl/pay/mobile/userIndex',//查询账户余额
+  'mobileBankCardList' : '$serviceUrl/pay/mobile/bankCardList',//绑定的银行卡列表
+  'sendModifyCode' : '$serviceUrl/pay/mobile/sendModifyPayPasswordVerifyCode',//设置交易密码验证码
+  'modifyPassword' : '$serviceUrl/pay/mobile/modifyWithdrawPassword', //修改交易密码
+  'sendBankCardVerifyCode' : '$serviceUrl/pay/mobile/sendAddBankCardVerifyCode',//添加银行卡的发送验证码
+  'addBankCard' : '$serviceUrl/pay/mobile/addBankCard',//添加银行卡
+  'deleteBankCard' : '$serviceUrl/pay/mobile/deleteBankCard', //删除银行卡
+  'setDefaultBankCard' : '$serviceUrl/pay/mobile/setDefaultBankCard',//银行卡设置为默认银行卡
+
 };

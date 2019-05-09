@@ -9,6 +9,7 @@ import '../pages/my_oil_card_page.dart';
 import '../pages/my_collect_recode_page.dart';
 import '../pages/subscribe_line_route_page.dart';
 import '../pages/change_phone_page.dart';
+import '../pages/my_account_page.dart';
 
 class MinePage extends StatefulWidget {
   _MinePageState createState() => _MinePageState();
@@ -34,7 +35,11 @@ class _MinePageState extends State<MinePage> {
                 return BankCardPage();
               }));
             }),
-            itemContent('assets/images/trading_account.png', '我的交易账户', (){}),
+            itemContent('assets/images/trading_account.png', '我的交易账户', (){
+              Navigator.push(context, MaterialPageRoute(builder: (context){
+                return MyAccountPage();
+              }));
+            }),
             itemContent('assets/images/join.png', '挂靠公司', (){
               Navigator.push(context, MaterialPageRoute(builder: (context){
                 return JoinCompanyPage();
