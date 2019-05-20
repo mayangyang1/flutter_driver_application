@@ -52,5 +52,8 @@ const servicePath = {
   'addBankCard' : '$serviceUrl/pay/mobile/addBankCard',//添加银行卡
   'deleteBankCard' : '$serviceUrl/pay/mobile/deleteBankCard', //删除银行卡
   'setDefaultBankCard' : '$serviceUrl/pay/mobile/setDefaultBankCard',//银行卡设置为默认银行卡
+  'caculateCharge' : '$serviceUrl/pay/mobile/withdrawCharge',//提现费用计算
+  'checkPassword' : '$serviceUrl/pay/mobile/checkWithdrawPassword', //校验提现密码是否存在
+  'doWithdraw' : '$serviceUrl/pay/mobile/doWithdraw', //提现
 
 };

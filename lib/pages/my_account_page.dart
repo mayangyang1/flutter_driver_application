@@ -135,7 +135,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
   _bindRaiseCash() {//去提现
     if(accountObj['bankCardList'].length > 0){
       Navigator.push(context, MaterialPageRoute(builder: (context){
-        return RaiseCashPage();
+        return RaiseCashPage(cash: accountObj['userInfo']['cash'],);
       })).then((res){
         accountObj = {};
         _getAccountMessage();
@@ -148,5 +148,10 @@ class _MyAccountPageState extends State<MyAccountPage> {
         _getAccountMessage();
       });
     }
+  }
+  @override
+  void dispose() { 
+    accountObj = {};
+    super.dispose();
   }
 }

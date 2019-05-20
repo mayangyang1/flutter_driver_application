@@ -28,7 +28,9 @@ Future getAjax(url, stringParams, context) async{
       return null;
     }
     if(response.data['code'] == 500) {
-       Toast.toast(context, response.data['content']);
+      Future.delayed(Duration(milliseconds: 10),(){
+        Toast.toast(context, response.data['content']);
+      });
     }else if(response.data['code'] == 401) {
       Navigator.pushNamedAndRemoveUntil(context, '/login', (route)=>false);
     }else {
@@ -58,7 +60,9 @@ Future postAjax(String url, Map<String, dynamic>params,  BuildContext context) a
       return null;
     }
     if(response.data['code'] == 500) {
-      Toast.toast(context, response.data['content']);
+      Future.delayed(Duration(milliseconds: 10),(){
+        Toast.toast(context, response.data['content']);
+      });
     }else if(response.data['code'] == 401) {
       Navigator.pushNamedAndRemoveUntil(context, '/login', (route)=>false);
     }else{
@@ -94,8 +98,9 @@ Future getAjaxStr(url, stringParams, context) async{
       return null;
     }
     if(response.data['code'] == 500) {
-       Toast.toast(context, response.data['content']);
-     
+      Future.delayed(Duration(milliseconds: 10),(){
+        Toast.toast(context, response.data['content']);
+      });
     }else if(response.data['code'] == 401) {
       Navigator.pushNamedAndRemoveUntil(context, '/login', (route)=>false);
     }else{
@@ -124,8 +129,9 @@ Future postAjaxStr(url, params, context) async {
       return null;
     }
     if(response.data['code'] == 500) {
-      Toast.toast(context, response.data['content']);
-     
+      Future.delayed(Duration(milliseconds: 10),(){
+        Toast.toast(context, response.data['content']);
+      });
     }else if(response.data['code'] == 401) {
       Navigator.pushNamedAndRemoveUntil(context, '/login', (route)=>false);
     }else{
@@ -153,7 +159,9 @@ Future uploaFile(url, FormData formData, context) async {
       return null;
     }
     if(response.data['code'] == 500) {
-      Toast.toast(context, response.data['content']);
+      Future.delayed(Duration(milliseconds: 10),(){
+        Toast.toast(context, response.data['content']);
+      });
     }else if(response.data['code'] == 401) {
       Navigator.pushNamedAndRemoveUntil(context, '/login', (route)=>false);
     }else{

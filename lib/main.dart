@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import './pages/index_page.dart';
 import './pages/login_page.dart';
 import './pages/register_page.dart';
+import './common/splash_screen.dart';
+import './pages/index_page.dart';
+import './pages/my_account_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,8 +30,9 @@ class MyApp extends StatelessWidget {
         '/login': (BuildContext context) => LoginPage(),
         '/resource': (BuildContext context) => IndexPage(),
         '/register' : (BuildContext context) => RegisterPage(),
+        '/account' : (BuildContext context)  => MyAccountPage(),
       },
-      home: IndexPage(),
+      home: SplashScreen(),
     );
   }
 }

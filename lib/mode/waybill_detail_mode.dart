@@ -149,7 +149,7 @@ class WaybillDetailContent {
   String loadingInputUserFullName;
   num loadingGoodsNum;
   String dispatchUserFullName;
-  String driverReferPrice;
+  var driverReferPrice;
   String code;
   String platformTrailerTruckCode;
   String ownerOrgName;
@@ -173,14 +173,14 @@ class WaybillDetailContent {
   String loadingAddress;
   String loadingUserPhone;
   String dispatchUserCode;
-  String shuntedNum;
+  var shuntedNum;
   String unloadingCountyCode;
   String loadingAttachment;
   String unloadingOrgName;
   String unloadingProvinceCode;
   num unloadingGoodsVolume;
   String unloadingGoodsVolumeUnitCode;
-  String loadingNum;
+  var loadingNum;
   String carrierOrgCode;
   String driverPhone;
   String truckQtyUnitCode;
