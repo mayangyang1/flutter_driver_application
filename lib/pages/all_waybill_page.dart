@@ -93,8 +93,11 @@ class _AllWaybillPageState extends State<AllWaybillPage> {
             lineRouteWidget(index),
             Row(children: <Widget>[Text('${waybillList[index].loadingOrgName} —— ${waybillList[index].unloadingOrgName}', style: TextStyle(fontSize: ScreenUtil().setSp(28),height: 1.6),)],),
             Row(children: <Widget>[
-              Text('${waybillList[index].goodsName} ',style: TextStyle(fontSize: ScreenUtil().setSp(28),height: 1.6)),
-              Text(' ${waybillList[index].driverPrice}${unit[waybillList[index].meterageType]['driver.price'][waybillList[index].driverPriceUnitCode]}',style: TextStyle(fontSize: ScreenUtil().setSp(28),height: 1.6))
+              Container(
+                constraints: BoxConstraints(maxWidth: ScreenUtil().setWidth(240)),
+                child: Text('${waybillList[index].goodsName} ',style: TextStyle(fontSize: ScreenUtil().setSp(28),height: 1.6),maxLines: 1, overflow: TextOverflow.ellipsis,),
+              ),
+              Text( waybillList[index]?.driverPrice != null?' ${waybillList[index].driverPrice}${unit[waybillList[index].meterageType]['driver.price'][waybillList[index].driverPriceUnitCode]}' : ' ',style: TextStyle(fontSize: ScreenUtil().setSp(28),height: 1.6))
             ],),
             Row(children: <Widget>[
               Text('${waybillList[index].truckLicenseNo}',style: TextStyle(fontSize: ScreenUtil().setSp(28),height: 1.6)),
@@ -127,22 +130,26 @@ class _AllWaybillPageState extends State<AllWaybillPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Container(
-                width: ScreenUtil().setWidth(210),
-                child: Text("${waybillList[index].loadingCityName} ${waybillList[index].loadingCountyName}",style: TextStyle(fontSize: ScreenUtil().setSp(30),),maxLines: 1,overflow: TextOverflow.ellipsis,)
-              ),
-              Image.asset('assets/images/big_arrow.png'),
-              Container(
-                width: ScreenUtil().setWidth(210),
-                child:Text("${waybillList[index].unloadingCityName} ${waybillList[index].unloadingCountyName}",style: TextStyle(fontSize:  ScreenUtil().setSp(30),),maxLines: 1,overflow: TextOverflow.ellipsis,)
-              ),
-              
-            ],
-          ),
+          waybillList[index].routeName != null
+          ? Container(
+              constraints: BoxConstraints(maxWidth: ScreenUtil().setWidth(500)),
+              child: Text(waybillList[index].routeName,style: TextStyle(fontSize: ScreenUtil().setSp(30),),maxLines: 1,overflow: TextOverflow.ellipsis,),
+            )
+          : Row(
+              children: <Widget>[
+                Container(
+                  width: ScreenUtil().setWidth(210),
+                  child: Text("${waybillList[index].loadingCityName} ${waybillList[index].loadingCountyName}",style: TextStyle(fontSize: ScreenUtil().setSp(30),),maxLines: 1,overflow: TextOverflow.ellipsis,)
+                ),
+                Image.asset('assets/images/big_arrow.png'),
+                Container(
+                  width: ScreenUtil().setWidth(210),
+                  child:Text("${waybillList[index].unloadingCityName} ${waybillList[index].unloadingCountyName}",style: TextStyle(fontSize:  ScreenUtil().setSp(30),),maxLines: 1,overflow: TextOverflow.ellipsis,)
+                ),
+                
+              ],
+            ),
           Text("${waybillStatus[waybillList[index].waybillStatus]}",style: TextStyle(fontWeight: FontWeight.bold, fontSize:  ScreenUtil().setSp(32),color: Theme.of(context).primaryColor),)
-          
         ],
       ),
     );
@@ -185,37 +192,11 @@ class _AllWaybillPageState extends State<AllWaybillPage> {
         });
         waybillCodeList = codeList.join(',');
         print(waybillCodeList);
-        // _getWaybillActionList(waybillCodeList);
       }else if(waybilllistmode.code == 200 && page == 1){
         waybillList = [];
       }
     });
   }
-  // _getWaybillActionList(String waybillCodeList) {//获取运单业务动作列表
-  //   Map<String, dynamic> stringParams = {'type' : 'driverApi','businessCodeList' : waybillCodeList};
-  //   postAjax('waybillActionList', stringParams, context).then((res){
-  //     if(res != null && res['code'] == 200) {
-  //       Map actions = res['content'];
-  //       setState(() {
-  //         actionObj = actions;
-  //       });
-
-  //     }
-  //   });
-  // } 
-  // _actionButtonList(List actionList, String code) {
-  //   List<Widget> buttonlist = [];
-  //   actionList.forEach((item){
-  //     if(item['actionCode'] == 'waybillDriverCancel' ||  item['actionCode'] == 'waybillDriverReject' ){
-  //       buttonlist.insert(0,Padding(child: minButton('${item['actionName']}', false, () {}),padding: EdgeInsets.only(left: 10),));
-  //     }else{
-  //       buttonlist.add(Padding(child: minButton('${item['actionName']}', true, () {}),padding: EdgeInsets.only(left: 10),));
-
-  //     }
-      
-  //   });
-  //   return buttonlist;
-  // }
   @override
   void dispose() {
     waybillList = [];

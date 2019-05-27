@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../common/service_method.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CityPicker extends StatefulWidget {
   final BuildContext context;
@@ -85,11 +86,11 @@ class _CityPickerState extends State<CityPicker> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 320.0,
+      height: ScreenUtil().setHeight(640),
       child: DefaultTextStyle(
         style: TextStyle(
-          fontSize: 18.0,
-          color: Colors.black
+          fontSize: ScreenUtil().setSp(36),
+          color: Color(0xFF454545)
         ),
         child: Column(
           children: <Widget>[
@@ -102,13 +103,13 @@ class _CityPickerState extends State<CityPicker> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     FlatButton (
-                      child: Text('取消',style: TextStyle(fontSize: 18.0),),
+                      child: Text('取消',style: TextStyle(fontSize: ScreenUtil().setSp(36)),),
                       onPressed: (){
                         Navigator.of(context).pop('取消');
                       },
                     ),
                     FlatButton (
-                      child: Text('确认',style: TextStyle(fontSize: 18.0)),
+                      child: Text('确认',style: TextStyle(fontSize: ScreenUtil().setSp(36))),
                       onPressed: (){
                         Navigator.of(context).pop('确认');
                         if(city.length == 0 && area.length == 0) {

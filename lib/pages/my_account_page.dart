@@ -151,7 +151,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
   }
   @override
   void dispose() { 
-    accountObj = {};
+    accountObj = null;
     super.dispose();
   }
 }

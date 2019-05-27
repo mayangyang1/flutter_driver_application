@@ -94,7 +94,7 @@ Widget input(TextEditingController controller, String hintText, bool enabled, Fu
     margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
     padding: EdgeInsets.only(left: 5.0),
     decoration: BoxDecoration(
-      border: Border.all(width: 1.0, color: Colors.black54),
+      border: Border.all(width: 1.0, color: Color(0XFFCCCCCC)),
       borderRadius: BorderRadius.circular(5.0)
     ),
     child: TextField(
@@ -103,11 +103,12 @@ Widget input(TextEditingController controller, String hintText, bool enabled, Fu
         hintText: hintText,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(3.0),
-          borderSide: BorderSide(color: Colors.transparent)
+          borderSide: BorderSide(color: Colors.transparent),
         ),
         disabledBorder: InputBorder.none,
         enabledBorder:InputBorder.none,
         focusedBorder:InputBorder.none,
+        hintStyle: TextStyle(color: Color(0xFFCCCCCC))
       ),
       cursorColor: Colors.black,
       enabled: enabled,

@@ -341,11 +341,17 @@ class _WaybillDetailPageState extends State<WaybillDetailPage> {
   }
   Widget contentLi(title, dynamic value){
     return Container(
-      height: ScreenUtil().setHeight(50),
+      constraints: BoxConstraints(
+        minHeight: ScreenUtil().setHeight(50)
+      ),
       child: Row(
         children: <Widget>[
           Container(child: Text(title,style: TextStyle(fontSize: ScreenUtil().setSp(28),color: Color(0xFF888888)),),width: ScreenUtil().setWidth(200)),
-          Text(value !=null? value.toString(): '',style: TextStyle(fontSize: ScreenUtil().setSp(30)),)
+          Expanded(
+            flex: 1,
+            child:  Text(value !=null? value.toString(): '',style: TextStyle(fontSize: ScreenUtil().setSp(30)),),
+          )
+         
         ],
       ),
     );

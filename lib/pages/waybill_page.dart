@@ -108,7 +108,10 @@ class _WaybillPageState extends State<WaybillPage> {
             ? Row(children: <Widget>[Text('${waybillList[index].loadingOrgName} —— ${waybillList[index].unloadingOrgName}', style: TextStyle(fontSize: ScreenUtil().setSp(28),height: 1.6),)],)
             : Padding(child: null,padding: EdgeInsets.only(left: 0),),
             Row(children: <Widget>[
-              Text('${waybillList[index].goodsName} ',style: TextStyle(fontSize: ScreenUtil().setSp(28),height: 1.6)),
+              Container(
+                constraints: BoxConstraints(maxWidth: ScreenUtil().setWidth(240)),
+                child: Text('${waybillList[index].goodsName} ',style: TextStyle(fontSize: ScreenUtil().setSp(28),height: 1.6),overflow: TextOverflow.ellipsis,),
+              ),
               waybillList[index].driverPrice != null
               ? Text(' ${waybillList[index].driverPrice}${unit[waybillList[index].meterageType]['driver.price'][waybillList[index].driverPriceUnitCode]}',style: TextStyle(fontSize: ScreenUtil().setSp(28),height: 1.6))
               : Text('')
@@ -146,20 +149,26 @@ class _WaybillPageState extends State<WaybillPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Container(
-                width: ScreenUtil().setWidth(210),
-                child: Text("${waybillList[index].loadingCityName} ${waybillList[index].loadingCountyName}",style: TextStyle(fontSize: ScreenUtil().setSp(30),),maxLines: 1,overflow: TextOverflow.ellipsis,)
-              ),
-              Image.asset('assets/images/big_arrow.png'),
-              Container(
-                width: ScreenUtil().setWidth(210),
-                child:Text("${waybillList[index].unloadingCityName} ${waybillList[index].unloadingCountyName}",style: TextStyle(fontSize:  ScreenUtil().setSp(30),),maxLines: 1,overflow: TextOverflow.ellipsis,)
-              ),
-              
-            ],
-          ),
+          waybillList[index]?.routeName != null
+          ? Container(
+            width: ScreenUtil().setWidth(500),
+             child: Text(waybillList[index].routeName,style: TextStyle(fontSize: ScreenUtil().setSp(30),),maxLines: 1,overflow: TextOverflow.ellipsis,),
+           )
+          :Row(
+              children: <Widget>[
+                Container(
+                  width: ScreenUtil().setWidth(210),
+                  child: Text("${waybillList[index].loadingCityName} ${waybillList[index].loadingCountyName}",style: TextStyle(fontSize: ScreenUtil().setSp(30),),maxLines: 1,overflow: TextOverflow.ellipsis,)
+                ),
+                Image.asset('assets/images/big_arrow.png'),
+                Container(
+                  width: ScreenUtil().setWidth(210),
+                  child:Text("${waybillList[index].unloadingCityName} ${waybillList[index].unloadingCountyName}",style: TextStyle(fontSize:  ScreenUtil().setSp(30),),maxLines: 1,overflow: TextOverflow.ellipsis,)
+                ),
+                
+              ],
+            )
+          ,
           Text("${waybillStatus[waybillList[index].waybillStatus]}",style: TextStyle(fontWeight: FontWeight.bold, fontSize:  ScreenUtil().setSp(32),color: Theme.of(context).primaryColor),)
           
         ],

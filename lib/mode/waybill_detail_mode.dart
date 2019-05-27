@@ -30,7 +30,7 @@ class WaybillDetailContent {
   String platformDriverCode;
   String platformTruckCode;
   String payeeDriverFullName;
-  String truckQty;
+  var truckQty;
   String loadingGoodsNumCount;
   String platformCarrierOrgCode;
   String loadingCountyName;
@@ -128,7 +128,7 @@ class WaybillDetailContent {
   String loadingCityCode;
   String truckCode;
   String unloadingGoodsNumUnitCode;
-  String remainTruckQty;
+  var remainTruckQty;
   String carrierOwnerUserFullname;
   String loadingAttachmentExecuteUserFullName;
   String dispatchPrintStatus;

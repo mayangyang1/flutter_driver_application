@@ -55,5 +55,6 @@ const servicePath = {
   'caculateCharge' : '$serviceUrl/pay/mobile/withdrawCharge',//提现费用计算
   'checkPassword' : '$serviceUrl/pay/mobile/checkWithdrawPassword', //校验提现密码是否存在
   'doWithdraw' : '$serviceUrl/pay/mobile/doWithdraw', //提现
+  'tradeLog' : '$serviceUrl/pay/mobile/tradeLog', //获取交易记录
 
 };

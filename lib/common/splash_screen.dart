@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     return FadeTransition( //透明度动画组件
       opacity: _animation,  //执行动画
       child: Image.asset(  //网络图片
-        'assets/images/splash.jpeg',
+        'assets/images/splash.png',
         scale: 2.0,  //进行缩放
         fit:BoxFit.cover  // 充满父容器
       ),

@@ -55,7 +55,7 @@ class Toast {
       child: Card(
         color: Colors.black26,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
           child: Text(
             _msg,
             style: TextStyle(

@@ -76,7 +76,11 @@ flutter:
    - assets/images/transaction.png
    - assets/images/bank_bg.png
    - assets/images/close.png
-   - assets/images/splash.jpeg
+   - assets/images/splash.png
+   - assets/images/transaction-r.png
+   - assets/images/cancle-waybill.jpg
+   - assets/images/cashfailure.png
+   - assets/images/putforward.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

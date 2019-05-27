@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 singlePicker(BuildContext context, List<Map> singlePickerList, int _index, Function success) {
   return showCupertinoModalPopup(
@@ -34,11 +35,11 @@ class _CommonPickerState extends State<CommonPicker> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 320.0,
+      height: ScreenUtil().setHeight(640),
       child: DefaultTextStyle(
         style: TextStyle(
-          fontSize: 18.0,
-          color: Colors.black
+          fontSize: ScreenUtil().setSp(36),
+          color: Color(0xFF454545)
         ),
         child: Column(
           children: <Widget>[
@@ -51,7 +52,7 @@ class _CommonPickerState extends State<CommonPicker> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     FlatButton (
-                      child: Text('取消',style: TextStyle(fontSize: 18.0),),
+                      child: Text('取消',style: TextStyle(fontSize: ScreenUtil().setSp(36)),),
                       onPressed: (){
                         Navigator.of(context).pop('取消');
                         Map res = {'key': 'cancel', 'value': value};
@@ -59,7 +60,7 @@ class _CommonPickerState extends State<CommonPicker> {
                       },
                     ),
                     FlatButton (
-                      child: Text('确认',style: TextStyle(fontSize: 18.0)),
+                      child: Text('确认',style: TextStyle(fontSize: ScreenUtil().setSp(36))),
                       onPressed: (){
                         Navigator.of(context).pop('确认');
                         Map res = {'key': 'confirm', 'value': value};
