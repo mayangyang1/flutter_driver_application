@@ -5,7 +5,7 @@ A new Flutter project.
 ## 项目截图
 <div align=center>
   <img src="https://github.com/mayangyang1/flutter_driver_application/raw/master/assets/examples/example2.jpg" width = "400"  alt="图片名称" align="center" />
-</div> 
+</div></br>
 <div align=center>
   <img src="https://github.com/mayangyang1/flutter_driver_application/raw/master/assets/examples/example1.jpg" width = "400"  alt="图片名称" align="center" />
 </div>
