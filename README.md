@@ -3,7 +3,9 @@
 A new Flutter project.
 
 ## 项目截图
-<img src="https://github.com/mayangyang1/flutter_driver_application/raw/master/assets/examples/example1.jpg" width = "400"  alt="图片名称" align=center />
+<div align=center>
+  <img src="https://github.com/mayangyang1/flutter_driver_application/raw/master/assets/examples/example1.jpg" width = "400"  alt="图片名称" align="center" />
+ </div>
 ![](https://github.com/mayangyang1/flutter_driver_application/raw/master/assets/examples/example1.jpg =300*300)  
 ![](https://github.com/mayangyang1/flutter_driver_application/raw/master/assets/examples/example2.jpg)  
 ![](https://github.com/mayangyang1/flutter_driver_application/raw/master/assets/examples/example3.jpg)  
