@@ -7,7 +7,7 @@ import '../common/service_method.dart';
 import 'package:dio/dio.dart';
 import 'dart:io';
 import 'package:amap_location/amap_location.dart';
-// import 'package:simple_permissions/simple_permissions.dart';
+import 'package:simple_permissions/simple_permissions.dart';
 import '../components/toast.dart';
 
 class CollectionAndDeliveryPage extends StatefulWidget {
@@ -260,16 +260,16 @@ class _CollectionAndDeliveryPageState extends State<CollectionAndDeliveryPage> {
   _getLocation(String resourceCodeString)async {//获取经纬度
     await AMapLocationClient.startup(new AMapLocationOption( desiredAccuracy:CLLocationAccuracy.kCLLocationAccuracyHundredMeters  ));
 
-    // bool hasPermission = await SimplePermissions.checkPermission(Permission.WhenInUseLocation);
-    // if (!hasPermission) {
-    //   PermissionStatus requestPermissionResult =
-    //       await SimplePermissions.requestPermission(
-    //           Permission.WhenInUseLocation);
-    //   if (requestPermissionResult != PermissionStatus.authorized) {
-    //     Toast.toast(context, "申请定位权限失败");
-    //     return;
-    //   }
-    // }
+    bool hasPermission = await SimplePermissions.checkPermission(Permission.WhenInUseLocation);
+    if (!hasPermission) {
+      PermissionStatus requestPermissionResult =
+          await SimplePermissions.requestPermission(
+              Permission.WhenInUseLocation);
+      if (requestPermissionResult != PermissionStatus.authorized) {
+        Toast.toast(context, "申请定位权限失败");
+        return;
+      }
+    }
 
    AMapLocation _loc =  await AMapLocationClient.getLocation(false);//true 获取详细地址 false不获取地址
     if(_loc.isSuccess()) {

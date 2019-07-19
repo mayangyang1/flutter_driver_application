@@ -28,7 +28,7 @@ dependencies:
   photo_view: ^0.2.4
   image_picker: ^0.5.2
   amap_location: ^0.2.0
-
+  simple_permissions: 0.1.9
 
 dev_dependencies:
   flutter_test:

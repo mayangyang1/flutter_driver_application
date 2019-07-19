@@ -69,6 +69,7 @@ class _ManageBankCardPageState extends State<ManageBankCardPage> {
   Widget bankCardItem(Map item) {
     return Container(
       padding: EdgeInsets.only(left: 10,right:10,bottom: 8),
+      margin: EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         border: Border(top: BorderSide(width: 1,color: Color(0xFFCCCCCC)),bottom: BorderSide(width: 1,color: Color(0xFFCCCCCC))),
         color: Colors.white

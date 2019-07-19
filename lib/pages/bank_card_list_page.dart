@@ -22,7 +22,7 @@ class _BankCardListPageState extends State<BankCardListPage> {
       appBar: AppBar(title: Text('我的银行卡'),),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only(left:10,right:10,top:10),
+          padding: EdgeInsets.only(left:10,right:10,top:10,bottom: 20),
           child: Column(
             children: <Widget>[
               bankCardList(),
@@ -47,34 +47,37 @@ class _BankCardListPageState extends State<BankCardListPage> {
     );
   }
   Widget bankCardItem(Map item) {
-    return Stack(
-      children: <Widget>[
-        Image.asset('assets/images/bank_bg.png'),
-        Positioned(
-          left: 20,
-          top: 26,
-          child: Text('${item['realAccountName'] != null? item['realAccountName'].replaceRange(0,1,'*') : ''}',style: TextStyle(fontSize: ScreenUtil().setSp(34),color: Colors.white),),
-        ),
-        Positioned(
-          left: 20,
-          top: 60,
-          child: Text('${item['bankName'] != null? item['bankName'] : ''}',style: TextStyle(fontSize: ScreenUtil().setSp(34),color: Colors.white)),
-        ),
-        Positioned(
-          left: 20,
-          top: 90,
-          child: Row(
-            children: <Widget>[
-              Padding(
-                child: Text('**** **** **** ',style: TextStyle(fontSize: ScreenUtil().setSp(34),color: Colors.white)),
-                padding: EdgeInsets.only(top:4),
-              ),
-              Text('${item['realAccount'] != null? item['realAccount'].substring(item['realAccount'].length-4) : ''}',style: TextStyle(fontSize: ScreenUtil().setSp(34),color: Colors.white)),
-
-            ],
+    return Padding(
+      child: Stack(
+        children: <Widget>[
+          Image.asset('assets/images/bank_bg.png'),
+          Positioned(
+            left: 20,
+            top: 26,
+            child: Text('${item['realAccountName'] != null? item['realAccountName'].replaceRange(0,1,'*') : ''}',style: TextStyle(fontSize: ScreenUtil().setSp(34),color: Colors.white),),
           ),
-        )
-      ],
+          Positioned(
+            left: 20,
+            top: 60,
+            child: Text('${item['bankName'] != null? item['bankName'] : ''}',style: TextStyle(fontSize: ScreenUtil().setSp(34),color: Colors.white)),
+          ),
+          Positioned(
+            left: 20,
+            top: 90,
+            child: Row(
+              children: <Widget>[
+                Padding(
+                  child: Text('**** **** **** ',style: TextStyle(fontSize: ScreenUtil().setSp(34),color: Colors.white)),
+                  padding: EdgeInsets.only(top:4),
+                ),
+                Text('${item['realAccount'] != null? item['realAccount'].substring(item['realAccount'].length-4) : ''}',style: TextStyle(fontSize: ScreenUtil().setSp(34),color: Colors.white)),
+
+              ],
+            ),
+          )
+        ],
+      ),
+      padding: EdgeInsets.only(bottom: 10),
     );
   }
   Widget addBankCard() {
