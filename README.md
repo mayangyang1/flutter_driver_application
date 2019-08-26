@@ -2,7 +2,7 @@
 
 使用flutter 仿写司机端app项目
 
-## 项目截图
+## 项目部分页面截图
 <div align=center>
   <img src="https://github.com/mayangyang1/flutter_driver_application/raw/master/assets/examples/example2.jpg" width = "400"  alt="" align="center" />
 </div></br></br>
